@@ -7,23 +7,23 @@ const Landing = ({ children }: PropsWithChildren) => {
       <div className="landing-section" id="landingDiv">
         <div className="landing-container">
           <div className="landing-intro">
-            <h2>Hello! I'm</h2>
-            <h1>
-              RAJESH
-              <br />
-              <span>CHITYAL</span>
+            <h2>HOLA, I AM</h2>
+            <h1 className="landing-h1-name">
+              YASHWANTH <br /> CHALLA
             </h1>
           </div>
           <div className="landing-info">
-            <h3>A Full Stack</h3>
-            <h2 className="landing-info-h2">
-              <div className="landing-h2-1">Developer</div>
-              <div className="landing-h2-2">Engineer</div>
+            <h3>AI & Data Engineer</h3>
+            <h2 className="landing-h2-main">
+              <div className="landing-h2-info">Intelligent Systems</div>
+              <div className="landing-h2-info-1">Data Architect</div>
             </h2>
-            <h2>
-              <div className="landing-h2-info">Engineer</div>
-              <div className="landing-h2-info-1">Developer</div>
-            </h2>
+          </div>
+          <div className="scroll-hint-wrapper">
+            <div className="scroll-hint">
+              <span>Scroll to explore</span>
+              <div className="scroll-line"></div>
+            </div>
           </div>
         </div>
         {children}

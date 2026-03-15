@@ -26,7 +26,7 @@ const textures = imageUrls.map((url) => textureLoader.load(url));
 
 const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
 
-const spheres = [...Array(30)].map(() => ({
+const spheres = [...Array(18)].map(() => ({
   scale: [0.7, 1, 0.8, 1, 1][Math.floor(Math.random() * 5)],
 }));
 
@@ -34,7 +34,7 @@ type SphereProps = {
   vec?: THREE.Vector3;
   scale: number;
   r?: typeof THREE.MathUtils.randFloatSpread;
-  material: THREE.MeshPhysicalMaterial;
+  material: THREE.MeshStandardMaterial;
   isActive: boolean;
 };
 
@@ -154,21 +154,17 @@ const TechStack = () => {
   const materials = useMemo(() => {
     return textures.map(
       (texture) =>
-        new THREE.MeshPhysicalMaterial({
+        new THREE.MeshStandardMaterial({
           map: texture,
-          emissive: "#ffffff",
-          emissiveMap: texture,
-          emissiveIntensity: 0.3,
           metalness: 0.5,
-          roughness: 1,
-          clearcoat: 0.1,
+          roughness: 0.8,
         })
     );
   }, []);
 
   return (
     <div className="techstack">
-      <h2> My Techstack</h2>
+      <h2> My Expertise </h2>
 
       <Canvas
         shadows
@@ -204,7 +200,7 @@ const TechStack = () => {
           environmentRotation={[0, 4, 2]}
         />
         <EffectComposer enableNormalPass={false}>
-          <N8AO color="#0f002c" aoRadius={2} intensity={1.15} />
+          <N8AO color="#0f002c" aoRadius={2} intensity={0.8} />
         </EffectComposer>
       </Canvas>
     </div>
