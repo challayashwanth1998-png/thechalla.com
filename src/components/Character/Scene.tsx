@@ -55,22 +55,33 @@ const Scene = () => {
 
       loadCharacter().then((gltf) => {
         if (gltf) {
-          const animations = setAnimations(gltf);
-          hoverDivRef.current && animations.hover(gltf, hoverDivRef.current);
-          mixer = animations.mixer;
-          let character = gltf.scene;
-          setChar(character);
-          scene.add(character);
-          headBone = character.getObjectByName("spine006") || null;
-          screenLight = character.getObjectByName("screenlight") || null;
-          progress.loaded().then(() => {
-            setTimeout(() => {
+          try {
+            const animations = setAnimations(gltf);
+            hoverDivRef.current && animations.hover(gltf, hoverDivRef.current);
+            mixer = animations.mixer;
+            let character = gltf.scene;
+            setChar(character);
+            scene.add(character);
+            headBone = character.getObjectByName("spine006") || null;
+            screenLight = character.getObjectByName("screenlight") || null;
+            progress.loaded().then(() => {
+              setTimeout(() => {
+                light.turnOnLights();
+                animations.startIntro();
+              }, 2500);
+            });
+          } catch (e) {
+            console.error("Animation or character setup failed:", e);
+            // Fallback: Ensure progress completes even if animations or bones are missing
+            let character = gltf.scene;
+            setChar(character);
+            scene.add(character);
+            progress.loaded().then(() => {
               light.turnOnLights();
-              animations.startIntro();
-            }, 2500);
-          });
+            });
+          }
           window.addEventListener("resize", () =>
-            handleResize(renderer, camera, canvasDiv, character)
+            handleResize(renderer, camera, canvasDiv, gltf.scene)
           );
         }
       });
